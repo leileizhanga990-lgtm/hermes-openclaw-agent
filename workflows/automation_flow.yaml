@@ -1,0 +1,26 @@
+name: standard_agent_workflow
+version: 1.0
+
+layers:
+  brain: hermes-v1
+  executor: openclaw-core
+
+steps:
+  - id: 1
+    action: reasoning
+    input: user_query
+    output: task_plan
+    description: "Analyze user intent and generate structured plan"
+
+  - id: 2
+    action: execution
+    tool: browser_automation
+    input: task_plan
+    output: execution_result
+    description: "Execute tasks via OpenClaw tools"
+
+  - id: 3
+    action: feedback
+    input: execution_result
+    output: final_response
+    description: "Return result to user and update memory"
